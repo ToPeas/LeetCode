@@ -41,16 +41,30 @@
  * @param {number[]} prices
  * @return {number}
  */
+// var maxProfit = function (prices) {
+//   let diff = 0
+//   for (let i = 0; i < prices.length - 1; i++) {
+//     for (let j = i + 1; j < prices.length; j++) {
+//       let tmp = prices[j] - prices[i]
+//       if (tmp > diff) {
+//         diff = tmp
+//       }
+//     }
+//   }
+//   return diff > 0 ? diff : 0
+// };
+
+
 var maxProfit = function (prices) {
   let diff = 0
-  for (let i = 0; i < prices.length - 1; i++) {
-    for (let j = i + 1; j < prices.length; j++) {
-      let tmp = prices[j] - prices[i]
-      if (tmp > diff) {
-        diff = tmp
-      }
+  let min = Number.MAX_VALUE
+  for (let i = 0; i < prices.length ; i++) {
+    if (prices[i] < min) {
+      min = prices[i]
+    } else if (prices[i] - min > diff) {
+      diff = prices[i] - min
     }
   }
-  return diff > 0 ? diff : 0
+  return diff
 };
 // @lc code=end

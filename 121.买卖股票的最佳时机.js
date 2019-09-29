@@ -42,7 +42,15 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
-  let diff = 
+  let diff = 0
+  for (let i = 0; i < prices.length - 1; i++) {
+    for (let j = i + 1; j < prices.length; j++) {
+      let tmp = prices[j] - prices[i]
+      if (tmp > diff) {
+        diff = tmp
+      }
+    }
+  }
+  return diff > 0 ? diff : 0
 };
 // @lc code=end
-

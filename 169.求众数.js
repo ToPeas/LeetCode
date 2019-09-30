@@ -35,8 +35,25 @@
  * @param {number[]} nums
  * @return {number}
  */
-var majorityElement = function(nums) {
-    
+var majorityElement = function (nums) {
+  let len = nums.length
+  if (len === 0) return null
+  if (len === 1) return nums[0]
+  let arr = nums.sort((a, b) => a - b)
+  let num = 1
+  let _len = Math.ceil(nums.length / 2)
+  for (let i = 0; i < len; i++) {
+    if (arr[i] === arr[i + 1]) {
+      num = num + 1
+      if (num >= _len) {
+        return arr[i]
+      }
+    } else {
+      num = 1
+    }
+
+  }
+
 };
 // @lc code=end
 

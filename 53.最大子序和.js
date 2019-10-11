@@ -52,7 +52,7 @@ var maxSubArray = function (nums) {
       }
     }
   }
-  console.log(arr)
+  // console.log(arr)
   return max
 };
 

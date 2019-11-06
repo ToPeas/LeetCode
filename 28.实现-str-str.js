@@ -44,8 +44,30 @@
  * @param {string} needle
  * @return {number}
  */
+
+// // 解法1
+// var strStr = function (haystack, needle) {
+//   return haystack.indexOf(needle)
+// };
+
+// 解法2
 var strStr = function (haystack, needle) {
-  
+  if (!needle.length) return 0
+  for (let i = 0; i < haystack.length; i++) {
+    if (haystack[i] != needle[0]) continue
+    let j = needle.length - 1
+    let flag = true
+    while (flag && j >= 0) {
+      if (haystack[i + j] === needle[j]) {
+        j--
+      } else {
+        flag = false
+        break
+      }
+    }
+    if (flag) return i
+  }
+  return -1
 };
 // @lc code=end
 

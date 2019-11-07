@@ -39,29 +39,46 @@
  * @param {number[]} nums
  * @return {number}
  */
-var findUnsortedSubarray = function (nums) {
-  if (nums.length === 1) return 0
-  let head = 0
-  let tail = nums.length - 1
-  let head_ = true
-  let tail_ = true
-  while ((head_ || tail_) && head <= tail) {
-    if (head_ && nums[head] <= nums[head + 1]) {
-      head++
-    } else {
-      head_ = false
-    }
+// var findUnsortedSubarray = function (nums) {
+//   if (nums.length === 1) return 0
+//   let head = 0
+//   let tail = nums.length - 1
+//   let head_ = true
+//   let tail_ = true
+//   while ((head_ || tail_) && head <= tail) {
+//     if (head_ && nums[head] <= nums[head + 1]) {
+//       head++
+//     } else {
+//       head_ = false
+//     }
 
-    if (tail_ && nums[tail - 1] <= nums[tail]) {
-      tail--
-    } else {
-      tail_ = false
-    }
-    if (head === tail) return 0
-  }
-  return tail - head + 1
-};
+//     if (tail_ && nums[tail - 1] <= nums[tail]) {
+//       tail--
+//     } else {
+//       tail_ = false
+//     }
+//     if (head === tail) return 0
+//   }
+//   return tail - head + 1
+// };
 
+
+// 正常的解法
 // 这题已经想到用双指针
+// js 的sort 是原地算法
+
+var findUnsortedSubarray = function (nums) {
+  let sort_nums = [...nums].sort((a, b) => a - b)
+  let n = nums.length - 1
+  let i = 0
+  while (i < n && nums[i] === sort_nums[i]) {
+    i++
+  }
+  while (n >= 0 && nums[n] === sort_nums[n]) {
+    n--
+  }
+  if ((n - i + 1) < 0) return 0
+  return n - i + 1
+}
 // @lc code=end
 

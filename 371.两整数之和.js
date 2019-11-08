@@ -35,7 +35,7 @@
  * @return {number}
  */
 var getSum = function(a, b) {
-    
+
 };
 // @lc code=end
 

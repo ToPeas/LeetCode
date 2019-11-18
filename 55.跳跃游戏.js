@@ -40,8 +40,38 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-var canJump = function(nums) {
-    
+// var canJump = function (nums) {
+//   let dp = {}
+//   dp[nums] = 2
+//   dp[0] = 0
+//   for (let i = nums.length - 2; i >= 0; i--) {
+//     for (let j = i; j >= 0; j--) {
+//       if (j + nums[j] > nums.length - 1 || nums[j + nums[j]] === 2) {
+//         nums[j] = 2
+//       } else {
+//         nums[j] = 1
+//       }
+//     }
+//   }
+//   return dp[1] === 2
+// };
+
+var canJump = function (nums) {
+    let dp = {}
+    for (let k = 0; k < nums.length - 1; k++) {
+        dp[k] = 0
+    }
+    dp[nums.length - 1] = 2
+    for (let i = nums.length - 2; i >= 0; i--) {
+        let min = Math.min(i + nums[i], nums.length - 1)
+        for (let j = i + 1; j <= min; j++) {
+            if (dp[j] === 2) {
+                dp[i] = 2
+                break
+            }
+        }
+    }
+    return dp[0] === 2
 };
 // @lc code=end
 

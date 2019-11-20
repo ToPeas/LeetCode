@@ -50,13 +50,23 @@
  * @param {number[]} prices
  * @return {number}
  */
+// var maxProfit = function (prices) {
+//   let sum = 0
+//   for (let i = 1; i < prices.length; i++) {
+//     let tmp = prices[i] - prices[i - 1]
+//     if (tmp > 0) sum += tmp
+//   }
+//   return sum
+// };
+
 var maxProfit = function (prices) {
-  let sum = 0
+  if (prices.length < 2) return 0
+  let dp = []
+  dp[0] = 0
   for (let i = 1; i < prices.length; i++) {
-    let tmp = prices[i] - prices[i - 1]
-    if (tmp > 0) sum += tmp
+    dp[i] = Math.max(dp[i - 1], dp[i - 1] + prices[i] - prices[i - 1])
   }
-  return sum
+  return dp[prices.length - 1]
 };
 // @lc code=end
 

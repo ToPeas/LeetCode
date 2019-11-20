@@ -55,16 +55,29 @@
 // };
 
 
+// var maxProfit = function (prices) {
+//   let diff = 0
+//   let min = Number.MAX_VALUE
+//   for (let i = 0; i < prices.length ; i++) {
+//     if (prices[i] < min) {
+//       min = prices[i]
+//     } else if (prices[i] - min > diff) {
+//       diff = prices[i] - min
+//     }
+//   }
+//   return diff
+// };
+
+
 var maxProfit = function (prices) {
-  let diff = 0
-  let min = Number.MAX_VALUE
-  for (let i = 0; i < prices.length ; i++) {
-    if (prices[i] < min) {
-      min = prices[i]
-    } else if (prices[i] - min > diff) {
-      diff = prices[i] - min
-    }
+  if (prices.length < 2) return 0
+  let dp = []
+  dp[0] = 0
+  let min = prices[0]
+  for (let i = 1; i < prices.length; i++) {
+      min = Math.min(prices[i], min)
+      dp[i] = Math.max(dp[i - 1], prices[i] - min)
   }
-  return diff
+  return dp[prices.length - 1]
 };
 // @lc code=end

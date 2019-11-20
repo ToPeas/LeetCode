@@ -36,8 +36,29 @@
  * @param {number[][]} grid
  * @return {number}
  */
-var minPathSum = function(grid) {
-    
+var minPathSum = function (grid) {
+  let m = grid.length
+  let n = grid[0].length
+  let dp = []
+  for (let i = 0; i < grid.length; i++) {
+      dp[i] = new Array(m).fill(0)
+  }
+  dp[m - 1][n - 1] = grid[m - 1][n - 1]
+  for (let i = m - 1; i >= 0; i--) {
+      for (let j = n - 1; j >= 0; j--) {
+          // dp[i - 1][j - 1] = Math.min(dp[i][j - 1] || 10000, dp[j - 1][i] || 10000) + grid[i - 1][j - 1] + grid[i][j]
+          if (i === m - 1 && j !== n - 1) {
+              dp[i][j] = dp[i][j + 1] + grid[i][j]
+          } else if (j === n - 1 && i !== m - 1) {
+              dp[i][j] = dp[i + 1][j] + grid[i][j]
+          } else if (i !== m - 1 && j !== n - 1) {
+              dp[i][j] = grid[i][j] + Math.min(dp[i][j + 1], dp[i + 1][j])
+          } else {
+              dp[i][j] = grid[i][j]
+          }
+      }
+  }
+  return dp[0][0]
 };
 // @lc code=end
 

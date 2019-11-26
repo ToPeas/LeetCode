@@ -62,7 +62,7 @@ var searchInsert = function(nums, target) {
           return mid
       }
   }
-  return start 
+  return start
 };
 // @lc code=end
 

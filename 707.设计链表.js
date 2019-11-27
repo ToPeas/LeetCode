@@ -57,14 +57,16 @@
  * Initialize your data structure here.
  */
 
-function node(val) {
+function Node(val) {
   this.val = val
   this.next = null
 }
 
 
 var MyLinkedList = function () {
-  return []
+  this.head = null
+  this.tail = null
+  this.size = 0
 };
 
 /**
@@ -73,7 +75,13 @@ var MyLinkedList = function () {
  * @return {number}
  */
 MyLinkedList.prototype.get = function (index) {
-  return
+  if (this.size === 0 || index > this.size - 1 || index < 0) return -1
+  let cur = this.head
+  while (index > 0) {
+    cur = cur.next
+    index--
+  }
+  return cur.val
 };
 
 /**
@@ -82,9 +90,16 @@ MyLinkedList.prototype.get = function (index) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtHead = function (val) {
-  const node = new node(val)
-  let prevFirst = this[0]
-  return this.length ? node.next = prevFirst : this.push(node)
+  let newNode = new Node(val)
+  if (!this.head) {
+    this.head = newNode
+    this.tail = newNode
+  } else {
+    newNode.next = this.head
+    this.head = newNode
+  }
+  this.size++
+  return this
 };
 
 /**
@@ -93,10 +108,18 @@ MyLinkedList.prototype.addAtHead = function (val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtTail = function (val) {
-  const node = new node(val)
-  let lastFirst = this.length > 1 ? this[this.length - 1] : null
-  return lastFirst ? lastFirst.next = node : this.push(node)
 
+  const newNode = new Node(val);
+
+  if (!this.head) {
+    this.head = newNode;
+    this.tail = newNode;
+  } else {
+    this.tail.next = newNode;
+    this.tail = newNode;
+  }
+  this.size++;
+  return this;
 };
 
 /**
@@ -106,16 +129,23 @@ MyLinkedList.prototype.addAtTail = function (val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtIndex = function (index, val) {
-  const node = new node(val)
-  if (index < 0) {
-    this.addAtHead(node)
-  } else if (this.length > index) {
-    this.splice(index - 1, 0, node)
-    this[index - 2].next = node
-    node.next = this[index]
-  } else if (this.length === index) {
-    this.addAtTail(node)
+  const newNode = new Node(val);
+  if (index > this.size) return;
+  if (index <= 0) {
+    return this.addAtHead(val);
   }
+  if (index === this.size) {
+    return this.addAtTail(val);
+  }
+
+  let cur = this.head;
+  for (let i = 0; i < index - 1; i++) {
+    cur = cur.next;
+  }
+  newNode.next = cur.next ? cur.next : null;
+  cur.next = newNode;
+  this.size++;
+  return this;
 };
 
 /**
@@ -124,17 +154,24 @@ MyLinkedList.prototype.addAtIndex = function (index, val) {
  * @return {void}
  */
 MyLinkedList.prototype.deleteAtIndex = function (index) {
-  if (index <= this.length && index >= 0) {
-    this.splice(index, 1)
-    if (index === 0) {
-      this.shift()
-    } else if (index === this.length) {
-      this.pop()
-    } else {
-      this[index - 1].next = this[index]
-
-    }
+  if (index >= this.size || index < 0) return;
+  if (index === 0) {
+    this.head = this.head.next;
+    this.size--;
+    return this;
   }
+
+  let cur = this.head;
+  for (let i = 0; i < index - 1; i++) {
+    cur = cur.next;
+  }
+
+  cur.next = cur.next.next ? cur.next.next : null;
+  if (!cur.next) {
+    this.tail = cur;
+  }
+  this.size--;
+  return this;
 };
 
 /**
@@ -148,5 +185,5 @@ MyLinkedList.prototype.deleteAtIndex = function (index) {
  */
 
 
-//  这里使用了数组来解决，并且还有错
+
 

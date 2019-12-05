@@ -36,6 +36,7 @@
 var productExceptSelf = function (nums) {
   let sum = 1
   let res = Array(nums.length)
+  
   for (let i = 0; i < nums.length; i++) {
     res[i] = sum
     sum = sum * nums[i]

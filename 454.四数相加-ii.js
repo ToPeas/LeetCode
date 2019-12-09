@@ -47,8 +47,28 @@
  * @param {number[]} D
  * @return {number}
  */
-var fourSumCount = function(A, B, C, D) {
-    
+var fourSumCount = function (A, B, C, D) {
+  const sumTwoList = function (x, y) {
+    let len = x.length
+    let res = new Map()
+    for (let i = 0; i < len; i++) {
+      for (let j = 0; j < len; j++) {
+        let c = x[i] + y[j]
+        res.set(c, res.get(c) + 1 || 1)
+      }
+    }
+    return res
+  }
+  let sum1 = sumTwoList(A, B)
+  let sum2 = sumTwoList(C, D)
+  let ans = 0
+  sum1.forEach((value, key) => {
+    let offset = 0 - key
+    if (sum2.has(offset)) {
+      ans += (sum1.get(key) * sum2.get(offset))
+    }
+  })
+  return ans
 };
 // @lc code=end
 

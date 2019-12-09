@@ -47,8 +47,18 @@
  * @param {number} k
  * @return {number}
  */
-var longestSubstring = function(s, k) {
-    
+var longestSubstring = function (s, k) {
+  let hash = {}, max = 0;
+  s.split('').forEach((val) => { hash[val] = hash[val] + 1 || 1 })
+  let c = Object.entries(hash).filter(([key, val]) => val < k);
+
+  if (c[0]) {
+    for (let seg of s.split(c.shift()[0])) {
+      max = Math.max(longestSubstring(seg, k), max)
+    }
+    return max
+  }
+  return s.length
 };
 // @lc code=end
 

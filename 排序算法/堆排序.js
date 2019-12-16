@@ -7,7 +7,7 @@ const buildMaxHeap = arr => {
   len = arr.length
   for (let i = Math.floor(len / 2); i >= 0; i--) {
     headify(arr, i)
-    console.log(arr)
+    // console.log(arr)
     debugger
   }
 }

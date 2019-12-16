@@ -2,7 +2,7 @@ const { test } = require("./test")
 
 const insertSort = (arr) => {
   let pre
-  let cur 
+  let cur
   for (let i = 1; i < arr.length; i++) {
     pre = i - 1
     cur = arr[i]

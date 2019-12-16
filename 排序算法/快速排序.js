@@ -1,7 +1,7 @@
 const { test } = require("./test")
 
 const quickSort = (arr) => {
-  // console.log(arr)
+
   if (arr.length <= 1) {
     return arr
   }

@@ -15,14 +15,10 @@
  * @return {number}
  */
 
-
 // 思路，就是求一个节点，左右子节点的最大深度
-
 
 var diameterOfBinaryTree = function (root) {
   let result = 1
-  maxDepth(root)
-  return result - 1
   function maxDepth(root) {
     if (!root) return 0
     let L = maxDepth(root.left)
@@ -30,9 +26,6 @@ var diameterOfBinaryTree = function (root) {
     result = Math.max(result, L + R + 1)
     return Math.max(L, R) + 1
   }
-
-};
-
-
-
-
+  maxDepth(root)
+  return result - 1
+}

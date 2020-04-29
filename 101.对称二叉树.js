@@ -51,8 +51,15 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isSymmetric = function(root) {
-    
-};
+var helper = function (t1, t2) {
+  if (!t1 && !t2) return true
+  if ((!t1 && t2) || (t1 && !t2) || (t1.val !== t2.val)) return false
+  return helper(t1.left, t2.right) && helper(t1.right, t2.left)
+}
+
+var isSymmetric = function (root) {
+  if (!root) return true
+  return helper(root, root)
+}
 // @lc code=end
 
